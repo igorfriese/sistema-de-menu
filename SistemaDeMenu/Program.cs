@@ -1,149 +1,259 @@
-﻿namespace SistemaDeMenu
+﻿using System.Threading.Channels;
+
+namespace SistemaDeMenu
 {
     class Program
     {
         static void Main(string[] args)
         {
-            string[] usuario = { "nome1", "nome2", "nome3", "nome4", "nome5" };
-            string[] senha = { "1", "2", "3", "4", "5" };
-
-            bool sairLista = false;
-
-            while (!sairLista)
+            string[] usuarios = new string[5];
+            string[] senhas = new string[5];
+            int total = 0;
+            string opcao = "";
+ 
+            while (opcao.ToLower() != "x")
             {
-                Console.Clear();
-                Console.WriteLine("1 - Exibir apenas nomes");
-                Console.WriteLine("2 - Exibir apenas senhas");
-                Console.WriteLine("3 - Exibir nomes e senhas");
-                Console.WriteLine("4 - Deletar um usuário");
-                Console.WriteLine("x - Sair");
 
-                string entradaListas = Console.ReadLine();
-                switch (entradaListas)
+            Console.WriteLine("====MENU====");
+            Console.WriteLine("1 - Cadastro");
+            Console.WriteLine("2 - Visualizar");
+            Console.WriteLine("3 - Buscar cadastro");
+            Console.WriteLine("4 - Deletar cadastro");
+            Console.WriteLine("5 - Edição");
+            Console.WriteLine("X - Sair do programa");
+            Console.WriteLine("Opção:");
+
+                opcao = Console.ReadLine();
+                int contador = 0;
+                switch (opcao)
                 {
                     case "1":
-                        //Exibir apenas nomes
-                        Console.Clear();
-                        Console.WriteLine("\nExibindo todos os usuarios\n");
-                        foreach (string nome in usuario)
-                        {
-                            if (nome == null)
-                            {
-                                break;
-                            }
-                            Console.WriteLine(nome);
-                        }
 
-                        Console.WriteLine("\nDigite ENTER para continuar");
-                        Console.ReadLine();
+                        if (contador > usuarios.Length) 
+                        {
+                            Console.WriteLine("Número máximo de usuários atingido!");
+                            break;
+                        }
+                        //cadastro de usuario
+                        Console.WriteLine("Insira seu usuário: ");
+
+                            usuarios[contador] = Console.ReadLine();
+                            
+                        
+
+                        //senha
+                        Console.WriteLine("Insira sua senha: ");
+
+                       
+                            senhas[contador] = Console.ReadLine();
+                            
+                       
+                        //final
+                        Console.WriteLine("Usuário cadastrado com sucesso!");
+                        contador++;
                         break;
-                    case "2":
-                        //Exibir apenas senhas
-                        Console.Clear();
-                        Console.WriteLine("\nExibindo todos as senhas\n");
-                        foreach (string senhaAcesso in senha)
-                        {
-                            if (senhaAcesso == null)
-                            {
-                                break;
-                            }
-                            Console.WriteLine(senhaAcesso);
-                        }
 
-                        Console.WriteLine("\nDigite ENTER para continuar");
-                        Console.ReadLine();
+                    case "2":
                         break;
                     case "3":
-                        //Exibir nome e senha
-                        Console.Clear();
-                        Console.WriteLine("\nExibindo todos os usuarios\n");
-                        for (int i = 0; i < usuario.Length; i++)
-                        {
-                            if (usuario[i] == null)
-                            {
-                                break;
-                            }
-                            Console.WriteLine($"Nome do usuário: {usuario[i]}  senha: {senha[i]}");
-                        }
-
-                        Console.WriteLine("\nDigite ENTER para continuar");
-                        Console.ReadLine();
                         break;
                     case "4":
-                        //Deleta um usuário
-                        Console.Clear();
-                        bool sairDelete = false;
-                        bool encontrado = false;
+                        bool sairLista = false;
 
-                        while (!sairDelete)
+                        while (!sairLista)
                         {
-                            Console.WriteLine("Delete um usuário digitando o nome ou X para sair\n");
-                            string delete = Console.ReadLine().ToLower();
-                            for (int i = 0; i < usuario.Length; i++)
-                            {
-                                if (delete == "x")
-                                {
-                                    sairDelete = true;
-                                    break;
-                                }
-                                else if (usuario[i] == null)
-                                {
-                                    continue;
-                                }
-                                else if (delete == usuario[i].ToLower())
-                                {
-                                    usuario[i] = null;
-                                    encontrado = true;
-                                    sairDelete = true;
-                                    break;
-                                }
-                            }
+                            Console.Clear();
+                            Console.WriteLine("1 - Exibir apenas nomes");
+                            Console.WriteLine("2 - Exibir apenas senhas");
+                            Console.WriteLine("3 - Exibir nomes e senhas");
+                            Console.WriteLine("4 - Deletar um usuário");
+                            Console.WriteLine("x - Sair");
 
-                            if(!encontrado && !sairDelete)
+                            string entradaListas = Console.ReadLine();
+                            switch (entradaListas)
                             {
-                                Console.WriteLine("Usuário não encontrado, tente novamente");
-                            }
-
-                            for (int i = 0; i < usuario.Length; i++)
-                            {
-                                if (usuario[i] == null)
-                                {
-                                    for (int j = i; j < usuario.Length - 1; j++)
+                                case "1":
+                                    //Exibir apenas nomes
+                                    Console.Clear();
+                                    Console.WriteLine("\nExibindo todos os usuarios\n");
+                                    foreach (string nome in usuario)
                                     {
-                                        usuario[j] = usuario[j + 1];
-                                        senha[j] = senha[j + 1];
+                                        if (nome == null)
+                                        {
+                                            break;
+                                        }
+                                        Console.WriteLine(nome);
                                     }
-                                    usuario[usuario.Length - 1] = null;
-                                    senha[senha.Length - 1] = null;
-                                }
+
+                                    Console.WriteLine("\nDigite ENTER para continuar");
+                                    Console.ReadLine();
+                                    break;
+                                case "2":
+                                    //Exibir apenas senhas
+                                    Console.Clear();
+                                    Console.WriteLine("\nExibindo todos as senhas\n");
+                                    foreach (string senhaAcesso in senha)
+                                    {
+                                        if (senhaAcesso == null)
+                                        {
+                                            break;
+                                        }
+                                        Console.WriteLine(senhaAcesso);
+                                    }
+
+                                    Console.WriteLine("\nDigite ENTER para continuar");
+                                    Console.ReadLine();
+                                    break;
+                                case "3":
+                                    //Exibir nome e senha
+                                    Console.Clear();
+                                    Console.WriteLine("\nExibindo todos os usuarios\n");
+                                    for (int i = 0; i < usuario.Length; i++)
+                                    {
+                                        if (usuario[i] == null)
+                                        {
+                                            break;
+                                        }
+                                        Console.WriteLine($"Nome do usuário: {usuario[i]}  senha: {senha[i]}");
+                                    }
+
+                                    Console.WriteLine("\nDigite ENTER para continuar");
+                                    Console.ReadLine();
+                                    break;
+                                case "4":
+                                    //Deleta um usuário
+                                    Console.Clear();
+                                    bool sairDelete = false;
+                                    bool encontrado = false;
+
+                                    while (!sairDelete)
+                                    {
+                                        Console.WriteLine("Delete um usuário digitando o nome ou X para sair\n");
+                                        string delete = Console.ReadLine().ToLower();
+                                        for (int i = 0; i < usuario.Length; i++)
+                                        {
+                                            if (delete == "x")
+                                            {
+                                                sairDelete = true;
+                                                break;
+                                            }
+                                            else if (usuario[i] == null)
+                                            {
+                                                continue;
+                                            }
+                                            else if (delete == usuario[i].ToLower())
+                                            {
+                                                usuario[i] = null;
+                                                encontrado = true;
+                                                sairDelete = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if (!encontrado && !sairDelete)
+                                        {
+                                            Console.WriteLine("Usuário não encontrado, tente novamente");
+                                        }
+
+                                        for (int i = 0; i < usuario.Length; i++)
+                                        {
+                                            if (usuario[i] == null)
+                                            {
+                                                for (int j = i; j < usuario.Length - 1; j++)
+                                                {
+                                                    usuario[j] = usuario[j + 1];
+                                                    senha[j] = senha[j + 1];
+                                                }
+                                                usuario[usuario.Length - 1] = null;
+                                                senha[senha.Length - 1] = null;
+                                            }
+                                        }
+                                    }
+
+                                    if (encontrado)
+                                    {
+                                        Console.WriteLine("\nExibindo todos os usuarios e senhas ATUALIZADOS\n");
+
+                                        for (int i = 0; i < usuario.Length; i++)
+                                        {
+                                            if (usuario[i] == null)
+                                            {
+                                                break;
+                                            }
+                                            Console.WriteLine($"Nome do usuário: {usuario[i]}  senha: {senha[i]}");
+                                        }
+
+                                        Console.WriteLine("\nDigite ENTER para continuar");
+                                        Console.ReadLine();
+                                    }
+                                    break;
+                                case "x":
+                                    sairLista = true;
+                                    break;
+                                default:
+                                    Console.WriteLine("Opção inválida");
+                                    break;
                             }
                         }
+                        break;
+                        case "5":
+                        string novaSenha;
+                        string novoUsuario;
 
-                        if (encontrado)
+                        Console.WriteLine("Informe qual usario gostaria de editar");
+
+                        if (usuarios.Contains(Console.ReadLine()))
                         {
-                            Console.WriteLine("\nExibindo todos os usuarios e senhas ATUALIZADOS\n");
 
-                            for (int i = 0; i < usuario.Length; i++)
+                            Console.WriteLine("Informe qual dado quer alterar: ");
+                            Console.WriteLine("1 - Nome");
+                            Console.WriteLine("2 - Senha");
+                            Console.WriteLine("3 - Sair");
+
+                            string resposta = Console.ReadLine();
+
+                            switch (resposta)
                             {
-                                if (usuario[i] == null)
-                                {
-                                    break;
-                                }
-                                Console.WriteLine($"Nome do usuário: {usuario[i]}  senha: {senha[i]}");
-                            }
+                                case "1":
 
-                            Console.WriteLine("\nDigite ENTER para continuar");
-                            Console.ReadLine();
+                                    Console.WriteLine("Favor informar novo usuario: ");
+                                    novoUsuario = Console.ReadLine();
+                                    Console.WriteLine("Usuario atualizado com sucesso");
+
+                                    break;
+
+                                case "2":
+                                    Console.WriteLine("Favor informar nova senha: ");
+                                    novaSenha = Console.ReadLine();
+                                    Console.WriteLine("Senha atualizada com sucesso");
+
+                                    break;
+
+                                case "3":
+                                    Console.WriteLine("Saindo...");
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Usuario nao encontrado");
+
                         }
                         break;
                     case "x":
-                        sairLista = true;
                         break;
                     default:
-                        Console.WriteLine("Opção inválida");
                         break;
                 }
             }
+
+
+
+            
+           
+
+
+            
         }
     }
 }
