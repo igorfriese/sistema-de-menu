@@ -70,6 +70,22 @@ namespace SistemaDeMenu
                         Console.ReadLine();
                         break;
                     case "3":
+                        Console.Write("Digite o nome que deseja buscar: ");
+                        string nomeBusca = Console.ReadLine();
+                        bool encontrado = false;
+
+                        for (int i = 0; i < usuarios.Length; i++)
+                        {
+                            if (nomeBusca.ToLower() == usuarios[i].ToLower())
+                            {
+                                Console.WriteLine($"Nome encontrado: {usuarios[i]}\n");
+                                encontrado = true;
+                            }
+                        }
+                        if (encontrado == false)
+                        {
+                            Console.WriteLine("Nome não encontrado!\n");
+                        }
                         break;
                     case "4":
 
@@ -189,14 +205,6 @@ namespace SistemaDeMenu
                         break;
                 }
             }
-
-
-
-
-
-
-
-
         }
     }
 }
