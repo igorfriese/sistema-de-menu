@@ -1,53 +1,119 @@
-﻿namespace SistemaDeMenu
+﻿using System.Threading.Channels;
+
+namespace SistemaDeMenu
 {
     class Program
     {
         static void Main(string[] args)
         {
-            string[] usuarios = { "Gabriel", "Igor", "Ana" };
-            string[] senhas = { "123", "456", "789" };
-            string novaSenha;
-            string novoUsuario;
-
-            Console.WriteLine("Informe qual usario gostaria de editar");
-
-            if (usuarios.Contains(Console.ReadLine()))
+            string[] usuarios = new string[5];
+            string[] senhas = new string[5];
+            int total = 0;
+            string opcao = "";
+ 
+            while (opcao.ToLower() != "x")
             {
 
-                Console.WriteLine("Informe qual dado quer alterar: ");
-                Console.WriteLine("1 - Nome");
-                Console.WriteLine("2 - Senha");
-                Console.WriteLine("3 - Sair");
+            Console.WriteLine("====MENU====");
+            Console.WriteLine("1 - Cadastro");
+            Console.WriteLine("2 - Visualizar");
+            Console.WriteLine("3 - Buscar cadastro");
+            Console.WriteLine("4 - Deletar cadastro");
+            Console.WriteLine("5 - Edição");
+            Console.WriteLine("X - Sair do programa");
+            Console.WriteLine("Opção:");
 
-                string resposta = Console.ReadLine();
-
-                switch (resposta)
+                opcao = Console.ReadLine();
+                int contador = 0;
+                switch (opcao)
                 {
                     case "1":
 
-                        Console.WriteLine("Favor informar novo usuario: ");
-                        novoUsuario = Console.ReadLine();
-                        Console.WriteLine("Usuario atualizado com sucesso");
+                        if (contador > usuarios.Length) 
+                        {
+                            Console.WriteLine("Número máximo de usuários atingido!");
+                            break;
+                        }
+                        //cadastro de usuario
+                        Console.WriteLine("Insira seu usuário: ");
 
+                            usuarios[contador] = Console.ReadLine();
+                            
+                        
+
+                        //senha
+                        Console.WriteLine("Insira sua senha: ");
+
+                       
+                            senhas[contador] = Console.ReadLine();
+                            
+                       
+                        //final
+                        Console.WriteLine("Usuário cadastrado com sucesso!");
+                        contador++;
                         break;
 
                     case "2":
-                        Console.WriteLine("Favor informar nova senha: ");
-                        novaSenha = Console.ReadLine();
-                        Console.WriteLine("Senha atualizada com sucesso");
-
                         break;
-
                     case "3":
-                        Console.WriteLine("Saindo...");
+                        break;
+                    case "4":
+                        break;
+                        case "5":
+                        string novaSenha;
+                        string novoUsuario;
+
+                        Console.WriteLine("Informe qual usario gostaria de editar");
+
+                        if (usuarios.Contains(Console.ReadLine()))
+                        {
+
+                            Console.WriteLine("Informe qual dado quer alterar: ");
+                            Console.WriteLine("1 - Nome");
+                            Console.WriteLine("2 - Senha");
+                            Console.WriteLine("3 - Sair");
+
+                            string resposta = Console.ReadLine();
+
+                            switch (resposta)
+                            {
+                                case "1":
+
+                                    Console.WriteLine("Favor informar novo usuario: ");
+                                    novoUsuario = Console.ReadLine();
+                                    Console.WriteLine("Usuario atualizado com sucesso");
+
+                                    break;
+
+                                case "2":
+                                    Console.WriteLine("Favor informar nova senha: ");
+                                    novaSenha = Console.ReadLine();
+                                    Console.WriteLine("Senha atualizada com sucesso");
+
+                                    break;
+
+                                case "3":
+                                    Console.WriteLine("Saindo...");
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Usuario nao encontrado");
+
+                        }
+                        break;
+                    case "x":
+                        break;
+                    default:
                         break;
                 }
             }
-            else
-            {
-                Console.WriteLine("Usuario nao encontrado");
 
-            }
+
+
+            
+           
         }
     }
 }
