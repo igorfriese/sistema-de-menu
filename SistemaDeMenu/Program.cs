@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            string[] nome = { "João", "Maria", "Pedro" };
+            string[] usuarios = { "João", "Maria", "Pedro" };
 
             Console.WriteLine("===MENU===");
             string opcao = "";
@@ -21,11 +21,11 @@
                         string nomeBusca = Console.ReadLine();
                         bool encontrado = false;
 
-                        for (int i = 0; i < nome.Length; i++)
+                        for (int i = 0; i < usuarios.Length; i++)
                         {
-                            if (nomeBusca.ToLower() == nome[i].ToLower())
+                            if (nomeBusca.ToLower() == usuarios[i].ToLower())
                             {
-                                Console.WriteLine($"Nome encontrado: {nome[i]}\n");
+                                Console.WriteLine($"Nome encontrado: {usuarios[i]}\n");
                                 encontrado = true;
                             }
                         }
