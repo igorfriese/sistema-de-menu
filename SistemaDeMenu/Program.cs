@@ -59,7 +59,7 @@ namespace SistemaDeMenu
                         break;
                     case "4":
                         break;
-                        case "5":
+                    case "5":
                         string novaSenha;
                         string novoUsuario;
 
@@ -82,7 +82,7 @@ namespace SistemaDeMenu
                                     Console.WriteLine("Favor informar novo usuario: ");
                                     novoUsuario = Console.ReadLine();
                                     Console.WriteLine("Usuario atualizado com sucesso");
-
+                                    
                                     break;
 
                                 case "2":
