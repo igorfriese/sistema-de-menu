@@ -8,7 +8,6 @@ namespace SistemaDeMenu
         {
             string[] usuarios = new string[5];
             string[] senhas = new string[5];
-            int total = 0;
             string opcao = "";
             int contador = 0;
 
@@ -37,17 +36,11 @@ namespace SistemaDeMenu
                         }
                         //cadastro de usuario
                         Console.WriteLine("Insira seu usuário: ");
-
                         usuarios[contador] = Console.ReadLine();
-
-
 
                         //senha
                         Console.WriteLine("Insira sua senha: ");
-
-
                         senhas[contador] = Console.ReadLine();
-
 
                         //final
                         Console.WriteLine("Usuário cadastrado com sucesso!");
@@ -205,7 +198,6 @@ namespace SistemaDeMenu
                                     novoUsuario = Console.ReadLine();
                                     for (int i = 0; i < usuarios.Length; i++)
                                     {
-                                        
                                         if (usuarios[i] == null)
                                         {
                                             continue;
@@ -225,7 +217,6 @@ namespace SistemaDeMenu
                                     novaSenha = Console.ReadLine();
                                     for (int i = 0; i < senhas.Length; i++)
                                     {
-                                      
                                        if (senhas[i] == null)
                                         {
                                             continue;
@@ -237,7 +228,6 @@ namespace SistemaDeMenu
                                         }
                                     }
                                     Console.WriteLine("Senha atualizada com sucesso");
-
                                     break;
 
                                 case "3":
@@ -248,11 +238,9 @@ namespace SistemaDeMenu
                         break;
 
                     case "x":
-
                         break;
 
                     default:
-
                         break;
                 }
             }
