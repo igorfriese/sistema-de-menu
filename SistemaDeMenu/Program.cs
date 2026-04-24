@@ -10,6 +10,7 @@ namespace SistemaDeMenu
             string[] senhas = new string[5];
             int total = 0;
             string opcao = "";
+            int contador = 0;
 
             while (opcao.ToLower() != "x")
             {
@@ -24,7 +25,7 @@ namespace SistemaDeMenu
                 Console.WriteLine("Opção:");
 
                 opcao = Console.ReadLine();
-                int contador = 0;
+
                 switch (opcao)
                 {
                     case "1":
@@ -54,6 +55,7 @@ namespace SistemaDeMenu
                         break;
 
                     case "2":
+
                         //Exibir nome e senha
                         Console.Clear();
                         Console.WriteLine("\nExibindo todos os usuarios\n");
@@ -69,24 +71,29 @@ namespace SistemaDeMenu
                         Console.WriteLine("\nDigite ENTER para continuar");
                         Console.ReadLine();
                         break;
+
                     case "3":
+
                         Console.Write("Digite o nome que deseja buscar: ");
                         string nomeBusca = Console.ReadLine();
-                        bool encontrado = false;
 
                         for (int i = 0; i < usuarios.Length; i++)
                         {
+                            if (usuarios[i].ToLower() == null)
+
+                            {
+                                Console.WriteLine("Usuario não encontrado");
+                                break;                            
+                            }
+
                             if (nomeBusca.ToLower() == usuarios[i].ToLower())
                             {
                                 Console.WriteLine($"Nome encontrado: {usuarios[i]}\n");
-                                encontrado = true;
+                                break;
                             }
                         }
-                        if (encontrado == false)
-                        {
-                            Console.WriteLine("Nome não encontrado!\n");
-                        }
                         break;
+
                     case "4":
 
                         //Deleta um usuário
@@ -155,15 +162,34 @@ namespace SistemaDeMenu
                             Console.ReadLine();
                         }
                         break;
+
                     case "5":
+
                         string novaSenha;
                         string novoUsuario;
+                        bool nomeEncontrado = false;
 
                         Console.WriteLine("Informe qual usario gostaria de editar");
+                        string buscaEdicao = Console.ReadLine();
 
-                        if (usuarios.Contains(Console.ReadLine()))
+                        for (int i = 0; i < usuarios.Length; i++)
                         {
+                            if (usuarios[i] == null)
+                            {
+                                Console.WriteLine("Não encontrado");
+                                break;
+                            }
+                            if (buscaEdicao.ToLower() == usuarios[i].ToLower())
+                            {
+                                Console.WriteLine($"Usuario encontrado: {usuarios[i]}\n");
+                                nomeEncontrado = true;
+                                break;
+                            }
+                        }
 
+                        if (nomeEncontrado)
+                        {
+                            
                             Console.WriteLine("Informe qual dado quer alterar: ");
                             Console.WriteLine("1 - Nome");
                             Console.WriteLine("2 - Senha");
@@ -177,13 +203,39 @@ namespace SistemaDeMenu
 
                                     Console.WriteLine("Favor informar novo usuario: ");
                                     novoUsuario = Console.ReadLine();
+                                    for (int i = 0; i < usuarios.Length; i++)
+                                    {
+                                        
+                                        if (usuarios[i] == null)
+                                        {
+                                            continue;
+                                        }
+                                        else
+                                        {
+                                            usuarios[i] = novoUsuario;
+                                            break;
+                                        }
+                                    }
                                     Console.WriteLine("Usuario atualizado com sucesso");
-                                    
+
                                     break;
 
                                 case "2":
                                     Console.WriteLine("Favor informar nova senha: ");
                                     novaSenha = Console.ReadLine();
+                                    for (int i = 0; i < senhas.Length; i++)
+                                    {
+                                      
+                                       if (senhas[i] == null)
+                                        {
+                                            continue;
+                                        }
+                                        else
+                                        {
+                                            senhas[i] = novaSenha;
+                                            break;
+                                        }
+                                    }
                                     Console.WriteLine("Senha atualizada com sucesso");
 
                                     break;
@@ -193,15 +245,14 @@ namespace SistemaDeMenu
                                     break;
                             }
                         }
-                        else
-                        {
-                            Console.WriteLine("Usuario nao encontrado");
+                        break;
 
-                        }
-                        break;
                     case "x":
+
                         break;
+
                     default:
+
                         break;
                 }
             }
