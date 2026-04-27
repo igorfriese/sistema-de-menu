@@ -29,7 +29,7 @@ namespace SistemaDeMenu
                 {
                     case "1":
 
-                        if (contador > usuarios.Length)
+                        if (contador >= usuarios.Length)
                         {
                             Console.WriteLine("Número máximo de usuários atingido!");
                             break;
@@ -72,7 +72,7 @@ namespace SistemaDeMenu
 
                         for (int i = 0; i < usuarios.Length; i++)
                         {
-                            if (usuarios[i].ToLower() == null)
+                            if (usuarios[i] == null)
 
                             {
                                 Console.WriteLine("Usuario não encontrado");
@@ -112,6 +112,7 @@ namespace SistemaDeMenu
                                 else if (delete == usuarios[i].ToLower())
                                 {
                                     usuarios[i] = null;
+                                    senhas[i] = null;
                                     encontrado = true;
                                     sairDelete = true;
                                     break;
@@ -134,12 +135,14 @@ namespace SistemaDeMenu
                                     }
                                     usuarios[usuarios.Length - 1] = null;
                                     senhas[senhas.Length - 1] = null;
+
                                 }
                             }
                         }
 
                         if (encontrado)
                         {
+                            contador--;
                             Console.WriteLine("\nExibindo todos os usuarios e senhas ATUALIZADOS\n");
 
                             for (int i = 0; i < usuarios.Length; i++)
