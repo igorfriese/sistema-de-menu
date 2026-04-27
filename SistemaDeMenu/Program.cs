@@ -29,7 +29,7 @@ namespace SistemaDeMenu
                 {
                     case "1":
 
-                        if (contador > usuarios.Length)
+                        if (contador >= usuarios.Length)
                         {
                             Console.WriteLine("Número máximo de usuários atingido!");
                             break;
@@ -72,7 +72,7 @@ namespace SistemaDeMenu
 
                         for (int i = 0; i < usuarios.Length; i++)
                         {
-                            if (usuarios[i].ToLower() == null)
+                            if (usuarios[i] == null)
 
                             {
                                 Console.WriteLine("Usuario não encontrado");
@@ -112,6 +112,7 @@ namespace SistemaDeMenu
                                 else if (delete == usuarios[i].ToLower())
                                 {
                                     usuarios[i] = null;
+                                    senhas[i] = null;
                                     encontrado = true;
                                     sairDelete = true;
                                     break;
@@ -134,12 +135,14 @@ namespace SistemaDeMenu
                                     }
                                     usuarios[usuarios.Length - 1] = null;
                                     senhas[senhas.Length - 1] = null;
+
                                 }
                             }
                         }
 
                         if (encontrado)
                         {
+                            contador--;
                             Console.WriteLine("\nExibindo todos os usuarios e senhas ATUALIZADOS\n");
 
                             for (int i = 0; i < usuarios.Length; i++)
@@ -160,7 +163,6 @@ namespace SistemaDeMenu
 
                         string novaSenha;
                         string novoUsuario;
-                        bool nomeEncontrado = false;
 
                         Console.WriteLine("Informe qual usario gostaria de editar");
                         string buscaEdicao = Console.ReadLine();
@@ -175,66 +177,54 @@ namespace SistemaDeMenu
                             if (buscaEdicao.ToLower() == usuarios[i].ToLower())
                             {
                                 Console.WriteLine($"Usuario encontrado: {usuarios[i]}\n");
-                                nomeEncontrado = true;
+
+                                Console.WriteLine("Informe qual dado quer alterar: ");
+                                Console.WriteLine("1 - Nome");
+                                Console.WriteLine("2 - Senha");
+                                Console.WriteLine("3 - Sair");
+
+                                string resposta = Console.ReadLine();
+
+                                switch (resposta)
+                                {
+                                    case "1":
+
+                                        Console.WriteLine("Favor informar novo usuario: ");
+                                        novoUsuario = Console.ReadLine();
+                                            if (usuarios[i] == null)
+                                            {
+                                                continue;
+                                            }
+                                            else
+                                            {
+                                                usuarios[i] = novoUsuario;
+                                                break;
+                                            }
+                                    case "2":
+
+                                        Console.WriteLine("Favor informar nova senha: ");
+                                        novaSenha = Console.ReadLine();
+                                      
+                                            if (senhas[i] == null)
+                                            {
+                                                continue;
+                                            }
+                                            else
+                                            {
+                                                senhas[i] = novaSenha;
+                                                break;
+                                            }
+                                    case "3":
+
+                                        Console.WriteLine("Saindo...");
+                                        break;
+                                }
+                                Console.WriteLine("Senha atualizada com sucesso");
                                 break;
                             }
                         }
 
-                        if (nomeEncontrado)
-                        {
-                            
-                            Console.WriteLine("Informe qual dado quer alterar: ");
-                            Console.WriteLine("1 - Nome");
-                            Console.WriteLine("2 - Senha");
-                            Console.WriteLine("3 - Sair");
 
-                            string resposta = Console.ReadLine();
-
-                            switch (resposta)
-                            {
-                                case "1":
-
-                                    Console.WriteLine("Favor informar novo usuario: ");
-                                    novoUsuario = Console.ReadLine();
-                                    for (int i = 0; i < usuarios.Length; i++)
-                                    {
-                                        if (usuarios[i] == null)
-                                        {
-                                            continue;
-                                        }
-                                        else
-                                        {
-                                            usuarios[i] = novoUsuario;
-                                            break;
-                                        }
-                                    }
-                                    Console.WriteLine("Usuario atualizado com sucesso");
-
-                                    break;
-
-                                case "2":
-                                    Console.WriteLine("Favor informar nova senha: ");
-                                    novaSenha = Console.ReadLine();
-                                    for (int i = 0; i < senhas.Length; i++)
-                                    {
-                                       if (senhas[i] == null)
-                                        {
-                                            continue;
-                                        }
-                                        else
-                                        {
-                                            senhas[i] = novaSenha;
-                                            break;
-                                        }
-                                    }
-                                    Console.WriteLine("Senha atualizada com sucesso");
-                                    break;
-
-                                case "3":
-                                    Console.WriteLine("Saindo...");
-                                    break;
-                            }
-                        }
                         break;
 
                     case "x":
